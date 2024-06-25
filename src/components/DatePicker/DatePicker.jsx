@@ -9,7 +9,7 @@ const getIsoString = (date) => {
   return isoDateString;
 };
 
-const DatePicker = ({ setDate, date, setShowCalendar }) => {
+const DatePicker = ({ onSelect, date, setShowCalendar }) => {
   const [currentDate, setCurrentDate] = useState(getIsoString(date));
   const [error, setError] = useState(null);
 
@@ -35,7 +35,7 @@ const DatePicker = ({ setDate, date, setShowCalendar }) => {
       const parsedDate = Date.parse(inputDate);
 
       if (!isNaN(parsedDate)) {
-        setDate(new Date(parsedDate));
+        onSelect(new Date(parsedDate));
         setShowCalendar(false);
         setError(null);
         return;

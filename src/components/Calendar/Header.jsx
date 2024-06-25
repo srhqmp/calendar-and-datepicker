@@ -1,12 +1,12 @@
 import { months } from "../../utils";
 
-const Header = ({ date, setDate, currentView, setCurrentView }) => {
+const Header = ({ date, onSelect, currentView, setCurrentView }) => {
   const changeMonth = (increment) => {
-    setDate(new Date(date.setMonth(date.getMonth() + increment)));
+    onSelect(new Date(date.setMonth(date.getMonth() + increment)));
   };
 
   const changeYear = (increment) => {
-    setDate(new Date(date.setFullYear(date.getFullYear() + increment)));
+    onSelect(new Date(date.setFullYear(date.getFullYear() + increment)));
   };
 
   const handleClickHeader = () => {

@@ -5,10 +5,9 @@ import DatePicker from "./components/DatePicker/DatePicker";
 const App = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
+    setCurrentDate(date);
   };
 
   return (
@@ -17,13 +16,12 @@ const App = () => {
       <div className="container">
         <DatePicker
           date={currentDate}
-          setDate={setCurrentDate}
+          onSelect={handleDateSelect}
           setShowCalendar={setShowCalendar}
         />
         {showCalendar && (
           <Calendar
             date={currentDate}
-            setDate={setCurrentDate}
             onSelect={handleDateSelect}
             setShowCalendar={setShowCalendar}
           />

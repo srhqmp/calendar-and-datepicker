@@ -3,11 +3,11 @@ import Header from "./Header";
 
 import { daysInMonth, getDayOfWeek, weekDays, months } from "../../utils";
 
-const MonthsView = ({ date, setDate, setCurrentView, isVisible }) => {
+const MonthsView = ({ date, onSelect, setCurrentView, isVisible }) => {
   if (!isVisible) return null;
 
   const handleClickMonth = (i) => {
-    setDate(new Date(date.setMonth(i)));
+    onSelect(new Date(date.setMonth(i)));
     setCurrentView("days");
   };
 
@@ -28,7 +28,7 @@ const MonthsView = ({ date, setDate, setCurrentView, isVisible }) => {
   );
 };
 
-const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
+const DaysView = ({ date, onSelect, isVisible, setShowCalendar }) => {
   const dateToday = new Date().getDate();
   const renderDays = () => {
     const days = [];
@@ -60,7 +60,7 @@ const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
             date.getDate() === day ? "current-date" : null
           } ${day === dateToday ? "date-now" : ""}`}
           onClick={() => {
-            setDate(new Date(date.setDate(day)));
+            onSelect(new Date(date.setDate(day)));
             setShowCalendar(false);
           }}
         >
@@ -97,7 +97,7 @@ const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
   );
 };
 
-const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
+const YearsView = ({ date, onSelect, isVisible, setCurrentView }) => {
   if (!isVisible) return null;
 
   const renderYears = () => {
@@ -112,7 +112,7 @@ const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
             i === currentYear - 9 || i === currentYear + 2 ? "outside" : ""
           } ${currentYear === i ? "current-date" : ""}`}
           onClick={() => {
-            setDate(new Date(date.setFullYear(i)));
+            onSelect(new Date(date.setFullYear(i)));
             setCurrentView("days");
           }}
         >
@@ -127,14 +127,14 @@ const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
   return <div className="calendar-grid-years">{renderYears()}</div>;
 };
 
-const Calendar = ({ date, setDate, onSelect, setShowCalendar }) => {
+const Calendar = ({ date, onSelect, setShowCalendar }) => {
   const [currentView, setCurrentView] = useState("days"); // days | months | years
 
   return (
     <div className="calendar">
       <Header
         date={date}
-        setDate={setDate}
+        onSelect={onSelect}
         currentView={currentView}
         setCurrentView={setCurrentView}
       />
@@ -142,17 +142,17 @@ const Calendar = ({ date, setDate, onSelect, setShowCalendar }) => {
         date={date}
         isVisible={currentView === "days"}
         setShowCalendar={setShowCalendar}
-        setDate={setDate}
+        onSelect={onSelect}
       />
       <MonthsView
         date={date}
         isVisible={currentView === "months"}
         setCurrentView={setCurrentView}
-        setDate={setDate}
+        onSelect={onSelect}
       />
       <YearsView
         date={date}
-        setDate={setDate}
+        onSelect={onSelect}
         isVisible={currentView === "years"}
         setCurrentView={setCurrentView}
       />
