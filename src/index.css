@@ -20,6 +20,7 @@ body {
 }
 
 .calendar {
+  font-size: 16px;
   width: 300px;
   padding: 10px;
   background-color: white;
@@ -67,8 +68,11 @@ body {
 .calendar-month {
   padding: 10px;
   text-align: center;
-  font-size: 14px;
   cursor: pointer;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar-year {
@@ -76,12 +80,19 @@ body {
   text-align: center;
   letter-spacing: -1px;
   cursor: pointer;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar-day {
   padding: 10px;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar-day.outside,
@@ -98,10 +109,15 @@ body {
   margin-bottom: 10px;
 }
 
+.date-now {
+  color: #db3d44;
+}
+
 .current-date {
   border-radius: 50%;
-  background-color: #ff0000;
+  background-color: #db3d44;
   color: #ffffff;
+  display: flex;
 }
 
 .date-picker {
@@ -122,10 +138,20 @@ body {
 @media (min-width: 1020px) {
   .calendar,
   .date-picker {
-    width: 500px;
+    width: 400px;
+    font-size: 20px;
+  }
+
+  .calendar {
+    height: 400px;
   }
 
   .title {
     font-size: 32px;
+  }
+
+  .calendar-month,
+  .calendar-year {
+    height: 50px;
   }
 }

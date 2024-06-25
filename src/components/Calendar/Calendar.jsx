@@ -29,6 +29,7 @@ const MonthsView = ({ date, setDate, setCurrentView, isVisible }) => {
 };
 
 const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
+  const dateToday = new Date().getDate();
   const renderDays = () => {
     const days = [];
 
@@ -57,7 +58,7 @@ const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
           key={`current-${day}`}
           className={`calendar-day ${
             date.getDate() === day ? "current-date" : null
-          }`}
+          } ${day === dateToday ? "date-now" : ""}`}
           onClick={() => {
             setDate(new Date(date.setDate(day)));
             setShowCalendar(false);
