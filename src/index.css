@@ -1,22 +1,47 @@
+body {
+  margin: 64px 8px;
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 75px;
+}
+
 .calendar {
-  width: 280px;
+  width: 300px;
   padding: 10px;
   background-color: white;
-  position: absolute;
   font-family: "Courier New", Courier, monospace;
+  border: 1px solid #dcdcdc;
+  box-sizing: border-box;
+  height: 350px;
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
+  cursor: pointer;
 }
 
 .calendar-header button {
   border: none;
   background-color: transparent;
   font-weight: 900;
+  cursor: pointer;
 }
 
 .calendar-grid {
@@ -29,33 +54,40 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .calendar-grid-years {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .calendar-month {
   padding: 10px;
   text-align: center;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .calendar-year {
   padding: 10px;
   text-align: center;
   letter-spacing: -1px;
+  cursor: pointer;
 }
 
 .calendar-day {
   padding: 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 .calendar-day.outside,
 .calendar-year.outside {
   color: #eeeeee;
+  cursor: default;
 }
 
 .calendar-weekdays {
@@ -70,4 +102,30 @@
   border-radius: 50%;
   background-color: #ff0000;
   color: #ffffff;
+}
+
+.date-picker {
+  position: relative;
+  background-image: url("/public/logo.svg");
+  background-size: 20px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 300px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (min-width: 1020px) {
+  .calendar,
+  .date-picker {
+    width: 500px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
 }

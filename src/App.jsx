@@ -13,19 +13,22 @@ const App = () => {
 
   return (
     <div>
-      <DatePicker
-        date={currentDate}
-        setDate={setCurrentDate}
-        setShowCalendar={setShowCalendar}
-      />
-      {showCalendar && (
-        <Calendar
+      <h3 className="title">Calendar & Datepicker</h3>
+      <div className="container">
+        <DatePicker
           date={currentDate}
           setDate={setCurrentDate}
-          onSelect={handleDateSelect}
           setShowCalendar={setShowCalendar}
         />
-      )}
+        {showCalendar && (
+          <Calendar
+            date={currentDate}
+            setDate={setCurrentDate}
+            onSelect={handleDateSelect}
+            setShowCalendar={setShowCalendar}
+          />
+        )}
+      </div>
     </div>
   );
 };
