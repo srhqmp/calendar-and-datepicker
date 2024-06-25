@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const getIsoString = (date) => {
   const year = date.getFullYear();
@@ -12,6 +12,12 @@ const getIsoString = (date) => {
 const DatePicker = ({ setDate, date, setShowCalendar }) => {
   const [currentDate, setCurrentDate] = useState(getIsoString(date));
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (date) {
+      setCurrentDate(getIsoString(date));
+    }
+  }, [date]);
 
   const handleEnter = (event) => {
     if (event.keyCode === 13 && event.code === "Enter") {
@@ -42,6 +48,7 @@ const DatePicker = ({ setDate, date, setShowCalendar }) => {
   return (
     <div>
       <input
+        className="date-picker"
         type="text"
         value={currentDate}
         onChange={handleInputChange}
