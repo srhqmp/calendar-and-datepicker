@@ -1,8 +1,23 @@
+import { useState } from "react";
 import Header from "./Header";
 
-import { daysInMonth, getDayOfWeek, weekDays } from "../../utils";
+import { daysInMonth, getDayOfWeek, weekDays, months } from "../../utils";
 
-const Calendar = ({ date, setDate, onSelect }) => {
+const MonthsView = ({ date, isVisible }) => {
+  if (!isVisible) return null;
+
+  return (
+    <div className="calendar-grid-month">
+      {months.map((month) => (
+        <div key={month} className="calendar-month">
+          {month}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const DaysView = ({ date, isVisible }) => {
   const renderDays = () => {
     const days = [];
 
@@ -56,11 +71,29 @@ const Calendar = ({ date, setDate, onSelect }) => {
     return weekDays.map((day, index) => <div key={index}>{day}</div>);
   };
 
+  if (!isVisible) return null;
+
   return (
-    <div className="calendar">
-      <Header date={date} setDate={setDate} />
+    <>
       <div className="calendar-weekdays">{renderWeekDays()}</div>
       <div className="calendar-grid">{renderDays()}</div>
+    </>
+  );
+};
+
+const Calendar = ({ date, setDate, onSelect }) => {
+  const [currentView, setCurrentView] = useState("days"); // days | months | years
+
+  return (
+    <div className="calendar">
+      <Header
+        date={date}
+        setDate={setDate}
+        currentView={currentView}
+        setCurrentView={setCurrentView}
+      />
+      <DaysView date={date} isVisible={currentView === "days"} />
+      <MonthsView date={date} isVisible={currentView === "months"} />
     </div>
   );
 };

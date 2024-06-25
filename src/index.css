@@ -25,6 +25,17 @@
   grid-template-rows: repeat(6, 1fr);
 }
 
+.calendar-grid-month {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.calendar-month {
+  padding: 10px;
+  text-align: center;
+}
+
 .calendar-day {
   padding: 10px;
   text-align: center;
