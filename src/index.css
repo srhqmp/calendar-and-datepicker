@@ -139,6 +139,14 @@ body {
   cursor: pointer;
 }
 
+.error-message {
+  font-size: 12px;
+  text-align: center;
+  color: #db3d44;
+  margin: 2px 0;
+  font-style: italic;
+}
+
 @media (min-width: 1020px) {
   .calendar,
   .date-picker {

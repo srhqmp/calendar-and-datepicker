@@ -20,3 +20,12 @@ export const daysInMonth = (month, year) =>
 
 export const getDayOfWeek = (date) =>
   new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+export const getIsoString = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const isoDateString = `${year}-${month}-${day}`;
+
+  return isoDateString;
+};

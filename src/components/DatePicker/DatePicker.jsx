@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 
-const getIsoString = (date) => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const isoDateString = `${year}-${month}-${day}`;
-
-  return isoDateString;
-};
+import { getIsoString } from "../../utils";
 
 const DatePicker = ({ onSelect, date, setShowCalendar }) => {
   const [currentDate, setCurrentDate] = useState(getIsoString(date));
@@ -16,6 +9,7 @@ const DatePicker = ({ onSelect, date, setShowCalendar }) => {
   useEffect(() => {
     if (date) {
       setCurrentDate(getIsoString(date));
+      setError(null);
     }
   }, [date]);
 
@@ -41,7 +35,7 @@ const DatePicker = ({ onSelect, date, setShowCalendar }) => {
         return;
       }
     }
-    setError("Invalid Date Format. Must be YYYY-MM-DD.");
+    setError("Invalid Date Format. Must be YYYY-MM-DD");
     setShowCalendar(true);
   };
 
