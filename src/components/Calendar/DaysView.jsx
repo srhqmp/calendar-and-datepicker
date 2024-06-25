@@ -1,7 +1,7 @@
 import { daysInMonth, getDayOfWeek, weekDays } from "../../utils";
 
 const DaysView = ({ date, onSelect, isVisible, setShowCalendar }) => {
-  const dateToday = new Date().getDate();
+  const dateToday = new Date()
   const renderDays = () => {
     const days = [];
 
@@ -23,14 +23,14 @@ const DaysView = ({ date, onSelect, isVisible, setShowCalendar }) => {
       );
     }
 
+
     // add days from the current month
     for (let day = 1; day <= daysInCurrentMonth; day++) {
       days.push(
         <div
           key={`current-${day}`}
-          className={`calendar-day ${
-            date.getDate() === day ? "current-date" : null
-          } ${day === dateToday ? "date-now" : ""}`}
+          className={`calendar-day ${date.getDate() === day ? "current-date" : null
+            } ${dateToday.getDate() === day && dateToday.getMonth() === date.getMonth() && dateToday.getFullYear() === date.getFullYear() ? "date-now" : ""}`}
           onClick={() => {
             onSelect(new Date(date.setDate(day)));
             setShowCalendar(false);
