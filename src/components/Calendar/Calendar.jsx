@@ -1,20 +1,14 @@
 import Header from "./Header";
 
+import { daysInMonth, getDayOfWeek, weekDays } from "../../utils";
+
 const Calendar = ({ date, onSelect }) => {
-  const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-
-  const getDayOfWeek = (date) =>
-    new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-
   const renderDays = () => {
     const days = [];
 
     const daysInCurrentMonth = daysInMonth(date.getMonth(), date.getFullYear());
 
     const firstDayIndex = getDayOfWeek(date);
-
-    console.log("day of week:", getDayOfWeek(date));
-    console.log({ firstDayIndex });
 
     const previousMonthDays = daysInMonth(
       date.getMonth() - 1,
@@ -33,7 +27,12 @@ const Calendar = ({ date, onSelect }) => {
     // add days from the current month
     for (let day = 1; day <= daysInCurrentMonth; day++) {
       days.push(
-        <div key={`current-${day}`} className="calendar-day">
+        <div
+          key={`current-${day}`}
+          className={`calendar-day ${
+            date.getDate() === day ? "current-day" : null
+          }`}
+        >
           {day}
         </div>
       );
@@ -53,9 +52,14 @@ const Calendar = ({ date, onSelect }) => {
     return days;
   };
 
+  const renderWeekDays = () => {
+    return weekDays.map((day, index) => <div key={index}>{day}</div>);
+  };
+
   return (
     <div className="calendar">
       <Header date={date} />
+      <div className="calendar-weekdays">{renderWeekDays()}</div>
       <div className="calendar-grid">{renderDays()}</div>
     </div>
   );
