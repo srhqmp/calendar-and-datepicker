@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Calendar from "./components/Calendar/Calendar";
+import DatePicker from "./components/DatePicker/DatePicker";
 
 const App = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateSelect = (date) => {
@@ -11,12 +13,19 @@ const App = () => {
 
   return (
     <div>
-      <h3>{selectedDate}</h3>
-      <Calendar
+      <DatePicker
         date={currentDate}
         setDate={setCurrentDate}
-        onSelect={handleDateSelect}
+        setShowCalendar={setShowCalendar}
       />
+      {showCalendar && (
+        <Calendar
+          date={currentDate}
+          setDate={setCurrentDate}
+          onSelect={handleDateSelect}
+          setShowCalendar={setShowCalendar}
+        />
+      )}
     </div>
   );
 };

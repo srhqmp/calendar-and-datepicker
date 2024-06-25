@@ -28,7 +28,7 @@ const MonthsView = ({ date, setDate, setCurrentView, isVisible }) => {
   );
 };
 
-const DaysView = ({ date, isVisible }) => {
+const DaysView = ({ date, setDate, isVisible, setShowCalendar }) => {
   const renderDays = () => {
     const days = [];
 
@@ -58,6 +58,10 @@ const DaysView = ({ date, isVisible }) => {
           className={`calendar-day ${
             date.getDate() === day ? "current-date" : null
           }`}
+          onClick={() => {
+            setDate(new Date(date.setDate(day)));
+            setShowCalendar(false);
+          }}
         >
           {day}
         </div>
@@ -100,7 +104,6 @@ const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
     const currentYear = date.getFullYear();
 
     for (let i = currentYear - 9; i <= currentYear + 2; i++) {
-      console.log({ i });
       years.push(
         <div
           key={i}
@@ -123,7 +126,7 @@ const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
   return <div className="calendar-grid-years">{renderYears()}</div>;
 };
 
-const Calendar = ({ date, setDate, onSelect }) => {
+const Calendar = ({ date, setDate, onSelect, setShowCalendar }) => {
   const [currentView, setCurrentView] = useState("days"); // days | months | years
 
   return (
@@ -134,7 +137,12 @@ const Calendar = ({ date, setDate, onSelect }) => {
         currentView={currentView}
         setCurrentView={setCurrentView}
       />
-      <DaysView date={date} isVisible={currentView === "days"} />
+      <DaysView
+        date={date}
+        isVisible={currentView === "days"}
+        setShowCalendar={setShowCalendar}
+        setDate={setDate}
+      />
       <MonthsView
         date={date}
         isVisible={currentView === "months"}
