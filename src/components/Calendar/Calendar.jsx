@@ -8,8 +8,13 @@ const MonthsView = ({ date, isVisible }) => {
 
   return (
     <div className="calendar-grid-month">
-      {months.map((month) => (
-        <div key={month} className="calendar-month">
+      {months.map((month, index) => (
+        <div
+          key={month}
+          className={`calendar-month ${
+            date.getMonth() === index ? "current-date" : ""
+          }`}
+        >
           {month}
         </div>
       ))}
@@ -45,7 +50,7 @@ const DaysView = ({ date, isVisible }) => {
         <div
           key={`current-${day}`}
           className={`calendar-day ${
-            date.getDate() === day ? "current-day" : null
+            date.getDate() === day ? "current-date" : null
           }`}
         >
           {day}
@@ -81,6 +86,37 @@ const DaysView = ({ date, isVisible }) => {
   );
 };
 
+const YearsView = ({ date, setDate, isVisible, setCurrentView }) => {
+  if (!isVisible) return null;
+
+  const renderYears = () => {
+    const years = [];
+    const currentYear = date.getFullYear();
+
+    for (let i = currentYear - 9; i <= currentYear + 2; i++) {
+      console.log({ i });
+      years.push(
+        <div
+          key={i}
+          className={`calendar-year ${
+            i === currentYear - 9 || i === currentYear + 2 ? "outside" : ""
+          } ${currentYear === i ? "current-date" : ""}`}
+          onClick={() => {
+            setDate(new Date(date.setFullYear(i)));
+            setCurrentView("days");
+          }}
+        >
+          {i}
+        </div>
+      );
+    }
+
+    return years;
+  };
+
+  return <div className="calendar-grid-years">{renderYears()}</div>;
+};
+
 const Calendar = ({ date, setDate, onSelect }) => {
   const [currentView, setCurrentView] = useState("days"); // days | months | years
 
@@ -94,6 +130,12 @@ const Calendar = ({ date, setDate, onSelect }) => {
       />
       <DaysView date={date} isVisible={currentView === "days"} />
       <MonthsView date={date} isVisible={currentView === "months"} />
+      <YearsView
+        date={date}
+        setDate={setDate}
+        isVisible={currentView === "years"}
+        setCurrentView={setCurrentView}
+      />
     </div>
   );
 };

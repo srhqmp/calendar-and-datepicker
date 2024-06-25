@@ -5,14 +5,29 @@ const Header = ({ date, setDate, currentView, setCurrentView }) => {
     setDate(new Date(date.setMonth(date.getMonth() + increment)));
   };
 
+  const changeYear = (increment) => {
+    setDate(new Date(date.setFullYear(date.getFullYear() + increment)));
+  };
+
   const handleClickHeader = () => {
     if (currentView === "days") setCurrentView("months");
     if (currentView === "months") setCurrentView("years");
+    if (currentView === "years") setCurrentView("days");
+  };
+
+  const handlePrev = () => {
+    if (currentView === "years") changeYear(-10);
+    if (currentView === "days") changeMonth(-1);
+  };
+
+  const handleNext = () => {
+    if (currentView === "years") changeYear(10);
+    if (currentView === "days") changeMonth(1);
   };
 
   return (
     <div className="calendar-header">
-      <button onClick={() => changeMonth(-1)}>{"<"}</button>
+      <button onClick={handlePrev}>{"<"}</button>
       <div onClick={handleClickHeader}>
         {currentView === "days" && (
           <>
@@ -20,8 +35,13 @@ const Header = ({ date, setDate, currentView, setCurrentView }) => {
           </>
         )}
         {currentView === "months" && <>{date.getFullYear()}</>}
+        {currentView === "years" && (
+          <>
+            {date.getFullYear() - 8} - {date.getFullYear() + 1}
+          </>
+        )}
       </div>
-      <button onClick={() => changeMonth(1)}>{">"}</button>
+      <button onClick={handleNext}>{">"}</button>
     </div>
   );
 };
