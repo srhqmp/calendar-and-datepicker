@@ -3,8 +3,13 @@ import Header from "./Header";
 
 import { daysInMonth, getDayOfWeek, weekDays, months } from "../../utils";
 
-const MonthsView = ({ date, isVisible }) => {
+const MonthsView = ({ date, setDate, setCurrentView, isVisible }) => {
   if (!isVisible) return null;
+
+  const handleClickMonth = (i) => {
+    setDate(new Date(date.setMonth(i)));
+    setCurrentView("days");
+  };
 
   return (
     <div className="calendar-grid-month">
@@ -14,6 +19,7 @@ const MonthsView = ({ date, isVisible }) => {
           className={`calendar-month ${
             date.getMonth() === index ? "current-date" : ""
           }`}
+          onClick={() => handleClickMonth(index)}
         >
           {month}
         </div>
@@ -129,7 +135,12 @@ const Calendar = ({ date, setDate, onSelect }) => {
         setCurrentView={setCurrentView}
       />
       <DaysView date={date} isVisible={currentView === "days"} />
-      <MonthsView date={date} isVisible={currentView === "months"} />
+      <MonthsView
+        date={date}
+        isVisible={currentView === "months"}
+        setCurrentView={setCurrentView}
+        setDate={setDate}
+      />
       <YearsView
         date={date}
         setDate={setDate}
