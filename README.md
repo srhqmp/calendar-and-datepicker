@@ -15,5 +15,5 @@ This command starts the development server using Vite, allowing you to preview t
 ## Screenshots
 
 ![App Screenshot](./public/calendar2.png)
-![App Screenshot](./public/calendar1.png)
+![App Screenshot](./public/calendar.png)
 
