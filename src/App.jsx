@@ -1,7 +1,20 @@
-import React from "react";
+import { useState } from "react";
+import Calendar from "./components/Calendar/Calendar";
 
 const App = () => {
-  return <div>App</div>;
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+  };
+
+  return (
+    <div>
+      <h3>{selectedDate}</h3>
+      <Calendar date={currentDate} onSelect={handleDateSelect} />
+    </div>
+  );
 };
 
 export default App;
