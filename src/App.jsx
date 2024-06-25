@@ -12,7 +12,11 @@ const App = () => {
   return (
     <div>
       <h3>{selectedDate}</h3>
-      <Calendar date={currentDate} onSelect={handleDateSelect} />
+      <Calendar
+        date={currentDate}
+        setDate={setCurrentDate}
+        onSelect={handleDateSelect}
+      />
     </div>
   );
 };

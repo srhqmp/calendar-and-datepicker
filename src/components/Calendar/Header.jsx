@@ -1,13 +1,17 @@
 import { months } from "../../utils";
 
-const Header = ({ date }) => {
+const Header = ({ date, setDate }) => {
+  const changeMonth = (increment) => {
+    setDate(new Date(date.setMonth(date.getMonth() + increment)));
+  };
+
   return (
     <div className="calendar-header">
-      <button>{"<"}</button>
+      <button onClick={() => changeMonth(-1)}>{"<"}</button>
       <div>
         {months[date.getMonth()]} {date.getFullYear()}
       </div>
-      <button>{">"}</button>
+      <button onClick={() => changeMonth(1)}>{">"}</button>
     </div>
   );
 };

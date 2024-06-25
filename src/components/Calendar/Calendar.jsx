@@ -2,7 +2,7 @@ import Header from "./Header";
 
 import { daysInMonth, getDayOfWeek, weekDays } from "../../utils";
 
-const Calendar = ({ date, onSelect }) => {
+const Calendar = ({ date, setDate, onSelect }) => {
   const renderDays = () => {
     const days = [];
 
@@ -58,7 +58,7 @@ const Calendar = ({ date, onSelect }) => {
 
   return (
     <div className="calendar">
-      <Header date={date} />
+      <Header date={date} setDate={setDate} />
       <div className="calendar-weekdays">{renderWeekDays()}</div>
       <div className="calendar-grid">{renderDays()}</div>
     </div>
